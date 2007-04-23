@@ -64,7 +64,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc
+%doc README Mixxx-Manual.pdf
 %attr(755,root,root) %{_bindir}/mixxx
 %dir %{_datadir}/mixxx/
 %{_datadir}/mixxx/skins
