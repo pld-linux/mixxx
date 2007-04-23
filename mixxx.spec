@@ -1,3 +1,8 @@
+#
+# TODO:
+# - desktop file as Source1
+# - polish description
+#
 Summary:	Mixxx
 Summary(pl.UTF-8):	Mixxx
 Name:		mixxx
