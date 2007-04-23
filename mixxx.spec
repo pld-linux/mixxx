@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	Mixxx
 Name:		mixxx
 Version:	1.5.0
 Release:	0.1
-License:	GPL/GPL2+
+License:	GPL/GPL v2+
 Group:		X11/Applications
 Source0:	http://dl.sourceforge.net/mixxx/%{name}-%{version}-src.tar.bz2
 # Source0-md5:	64aed846d3973dfb00a3d918ec7be769
