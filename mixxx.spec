@@ -1,10 +1,9 @@
 #
 # TODO:
 # - desktop file as Source1
-# - polish description
 #
-Summary:	Mixxx
-Summary(pl.UTF-8):	Mixxx
+Summary:	Mixxx - DJ tool
+Summary(pl.UTF-8):	Mixxx - narzędzie dla DJ-ów
 Name:		mixxx
 Version:	1.5.0
 Release:	0.1
@@ -30,15 +29,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Mixxx is an open source DJ tool designed for both professional and
 amateur DJs alike.
 
-#%description -l pl.UTF-8
+%description -l pl.UTF-8
+Mixxx to mające otwarte źródła narzędzie dla DJ-ów zaprojektowane
+zarówno dla profesjonalistów jak i amatorów.
 
 %prep
 %setup -q
-%if "%{_lib}" == "lib64"
-%{__sed} -i -e s#lib/libqt-mt#/usr/lib64/libqt-mt#g src/build.definition
-%else
-%{__sed} -i -e s#lib/libqt-mt#/usr/lib/libqt-mt#g src/build.definition
-%endif
+%{__sed} -i -e s#lib/libqt-mt#/usr/%{_lib}/libqt-mt#g src/build.definition
 
 %build
 export QTDIR=%{_prefix}
@@ -73,7 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README Mixxx-Manual.pdf
 %attr(755,root,root) %{_bindir}/mixxx
-%dir %{_datadir}/mixxx/
+%dir %{_datadir}/mixxx
 %{_datadir}/mixxx/skins
 %{_datadir}/mixxx/keyboard
 %{_datadir}/mixxx/midi
