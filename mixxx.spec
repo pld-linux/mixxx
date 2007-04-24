@@ -13,10 +13,12 @@ Group:		X11/Applications
 Source0:	http://dl.sourceforge.net/mixxx/%{name}-%{version}-src.tar.bz2
 # Source0-md5:	64aed846d3973dfb00a3d918ec7be769
 URL:		http://mixxx.sourceforge.net/
+BuildRequires:	audiofile-devel
 BuildRequires:	fftw-devel
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	libid3tag-devel
 BuildRequires:	libmad-devel
+BuildRequires:	libsndfile-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	portaudio-devel
 BuildRequires:	qmake
