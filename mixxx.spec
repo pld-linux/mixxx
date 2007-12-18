@@ -20,6 +20,7 @@ BuildRequires:	libmad-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	portaudio-devel
+BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	qmake
 BuildRequires:	qt-devel
 BuildRequires:	sed >= 4.0
