@@ -1,17 +1,15 @@
-#
-# TODO:
-# - desktop file as Source1
-#
 Summary:	Mixxx - DJ tool
 Summary(pl.UTF-8):	Mixxx - narzędzie dla DJ-ów
 Name:		mixxx
-Version:	1.5.0
-Release:	0.1
+Version:	1.8.2
+Release:	0.3
 License:	GPL/GPL v2+
 Group:		X11/Applications
-Source0:	http://dl.sourceforge.net/mixxx/%{name}-%{version}-src.tar.bz2
-# Source0-md5:	64aed846d3973dfb00a3d918ec7be769
-URL:		http://mixxx.sourceforge.net/
+Source0:	http://downloads.mixxx.org/mixxx-%{version}/%{name}-%{version}-src.tar.gz
+# Source0-md5:	f0297f4493d4d8e6ad59f72970bad7bc
+URL:		http://mixxx.org/
+BuildRequires:	OpenGL-GLU-devel
+BuildRequires:	Qt3Support-devel
 BuildRequires:	audiofile-devel
 BuildRequires:	fftw-devel
 BuildRequires:	jack-audio-connection-kit-devel
@@ -19,11 +17,9 @@ BuildRequires:	libid3tag-devel
 BuildRequires:	libmad-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libvorbis-devel
+BuildRequires:	pkgconfig
 BuildRequires:	portaudio-devel
-BuildRequires:	OpenGL-GLU-devel
-BuildRequires:	qmake
-BuildRequires:	qt-devel
-BuildRequires:	sed >= 4.0
+BuildRequires:	scons
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -36,33 +32,28 @@ zarówno dla profesjonalistów jak i amatorów.
 
 %prep
 %setup -q
-%{__sed} -i -e s#lib/libqt-mt#/usr/%{_lib}/libqt-mt#g src/build.definition
 
 %build
-export QTDIR=%{_prefix}
-cd src/
-qmake
-%{__make}
+export CXXFLAGS="%{rpmcxxflags}"
+export CCFLAGS="%{rpmcflags}"
+export CXX="%{__cxx}"
+export QMAKE_CXX="%{__cxx}"
+scons \
+	prefix=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name}/skins/{outline,traditional,outlineClose,outlineSmall}}
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/{midi,keyboard}
-# Copy skins
-install src/skins/outline/* $RPM_BUILD_ROOT%{_datadir}/mixxx/skins/outline
-install src/skins/outlineClose/* $RPM_BUILD_ROOT%{_datadir}/mixxx/skins/outlineClose
-install src/skins/outlineSmall/* $RPM_BUILD_ROOT%{_datadir}/mixxx/skins/outlineSmall
-install src/skins/traditional/* $RPM_BUILD_ROOT%{_datadir}/mixxx/skins/traditional
+export CXXFLAGS="%{rpmcxxflags}"
+export CCFLAGS="%{rpmcflags}"
+export CXX="%{__cxx}"
+export QMAKE_CXX="%{__cxx}"
+scons prefix=%{_prefix} install_root=$RPM_BUILD_ROOT install
 
-# Copy midi config files
-install src/midi/* $RPM_BUILD_ROOT%{_datadir}/mixxx/midi
+# I don't know why doesn't use 'prefix' option...
+install -d $RPM_BUILD_ROOT%{_prefix}
+mv $RPM_BUILD_ROOT/{bin,share} $RPM_BUILD_ROOT%{_prefix}
 
-# Copy keyboard config files
-install src/keyboard/* $RPM_BUILD_ROOT%{_datadir}/mixxx/keyboard
-
-# Copy mixxx binary
-install src/mixxx $RPM_BUILD_ROOT%{_bindir}
-#install src/mixxx-with-jack $RPM_BUILD_ROOT%{_bindir}
+rm -rf $RPM_BUILD_ROOT%{_docdir}/mixxx
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -72,6 +63,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc README Mixxx-Manual.pdf
 %attr(755,root,root) %{_bindir}/mixxx
 %dir %{_datadir}/mixxx
+%{_datadir}/mixxx/schema.xml
 %{_datadir}/mixxx/skins
 %{_datadir}/mixxx/keyboard
 %{_datadir}/mixxx/midi
+%{_desktopdir}/%{name}.desktop
+%{_pixmapsdir}/%{name}-icon.png
