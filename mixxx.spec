@@ -1,8 +1,9 @@
 Summary:	Mixxx - DJ tool
+Summary(hu.UTF-8):	Mixxx - DJ program
 Summary(pl.UTF-8):	Mixxx - narzędzie dla DJ-ów
 Name:		mixxx
 Version:	1.8.2
-Release:	0.3
+Release:	1
 License:	GPL/GPL v2+
 Group:		X11/Applications
 Source0:	http://downloads.mixxx.org/mixxx-%{version}/%{name}-%{version}-src.tar.gz
@@ -25,6 +26,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Mixxx is an open source DJ tool designed for both professional and
 amateur DJs alike.
+
+%description -l hu.UTF-8
+Mixxx egy nyílt forrású DJ eszköz profi és amatőr DJ-knek egyaránt.
 
 %description -l pl.UTF-8
 Mixxx to mające otwarte źródła narzędzie dla DJ-ów zaprojektowane
