@@ -21,6 +21,7 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	pkgconfig
 BuildRequires:	portaudio-devel
 BuildRequires:	scons
+Requires:	QtSql-sqlite3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
