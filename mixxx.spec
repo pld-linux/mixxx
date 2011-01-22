@@ -3,7 +3,7 @@ Summary(hu.UTF-8):	Mixxx - DJ program
 Summary(pl.UTF-8):	Mixxx - narzędzie dla DJ-ów
 Name:		mixxx
 Version:	1.8.2
-Release:	2
+Release:	3
 License:	GPL/GPL v2+
 Group:		X11/Applications
 Source0:	http://downloads.mixxx.org/mixxx-%{version}/%{name}-%{version}-src.tar.gz
