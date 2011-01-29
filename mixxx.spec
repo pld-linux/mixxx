@@ -3,11 +3,12 @@ Summary(hu.UTF-8):	Mixxx - DJ program
 Summary(pl.UTF-8):	Mixxx - narzędzie dla DJ-ów
 Name:		mixxx
 Version:	1.8.2
-Release:	3
+Release:	4
 License:	GPL/GPL v2+
 Group:		X11/Applications
 Source0:	http://downloads.mixxx.org/mixxx-%{version}/%{name}-%{version}-src.tar.gz
 # Source0-md5:	f0297f4493d4d8e6ad59f72970bad7bc
+Patch0:		%{name}-porttime.patch
 URL:		http://mixxx.org/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	Qt3Support-devel
@@ -23,7 +24,7 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	pkgconfig
 BuildRequires:	portaudio-devel
 BuildRequires:	portmidi-devel >= 217
-BuildRequires:	scons
+BuildRequires:	sed >= 4.0
 Requires:	QtSql-sqlite3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -40,13 +41,14 @@ zarówno dla profesjonalistów jak i amatorów.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 export CXXFLAGS="%{rpmcxxflags}"
 export CCFLAGS="%{rpmcflags}"
 export CXX="%{__cxx}"
 export QMAKE_CXX="%{__cxx}"
-%scons 
+%scons
 
 %install
 rm -rf $RPM_BUILD_ROOT
