@@ -24,6 +24,7 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	pkgconfig
 BuildRequires:	portaudio-devel
 BuildRequires:	portmidi-devel >= 217
+BuildRequires:	rpmbuild(macros) >= 1.566
 BuildRequires:	sed >= 4.0
 Requires:	QtSql-sqlite3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -41,6 +42,7 @@ zarówno dla profesjonalistów jak i amatorów.
 
 %prep
 %setup -q
+%undos src/SConscript.env
 %patch0 -p1
 
 %build
