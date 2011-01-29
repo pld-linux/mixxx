@@ -1,0 +1,11 @@
+--- mixxx-1.8.2/src/SConscript.env~	2010-12-06 00:07:57.000000000 +0100
++++ mixxx-1.8.2/src/SConscript.env	2011-01-29 12:01:03.455817668 +0100
+@@ -607,7 +607,7 @@
+ CheckFFMPEG(conf, sources)
+ 
+ #Check for PortTime
+-if not conf.CheckLib(['porttime', 'libporttime']) and not conf.CheckHeader(['porttime.h']):
++if not conf.CheckLib(['porttime', 'libportmidi']) and not conf.CheckHeader(['porttime.h']):
+ 	print "Did not find PortTime or its development headers, exiting!"
+ 	Exit(1)
+ 
