@@ -12,8 +12,11 @@ Patch0:		%{name}-porttime.patch
 URL:		http://mixxx.org/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	Qt3Support-devel
+BuildRequires:	QtOpenGL-devel
 BuildRequires:	QtScript-devel
+BuildRequires:	QtSvg-devel
 BuildRequires:	QtWebKit-devel
+BuildRequires:	QtXmlPatterns-devel
 BuildRequires:	audiofile-devel
 BuildRequires:	fftw-devel
 BuildRequires:	jack-audio-connection-kit-devel
@@ -24,7 +27,10 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	pkgconfig
 BuildRequires:	portaudio-devel
 BuildRequires:	portmidi-devel >= 217
+BuildRequires:	qt4-build
+BuildRequires:	qt4-linguist
 BuildRequires:	rpmbuild(macros) >= 1.566
+BuildRequires:	scons
 BuildRequires:	sed >= 4.0
 Requires:	QtSql-sqlite3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
