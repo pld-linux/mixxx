@@ -11,6 +11,8 @@ Source0:	http://downloads.mixxx.org/mixxx-%{version}/%{name}-%{version}-src.tar.
 URL:		http://mixxx.org/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	Qt3Support-devel
+BuildRequires:	QtScript-devel
+BuildRequires:	QtWebKit-devel
 BuildRequires:	audiofile-devel
 BuildRequires:	fftw-devel
 BuildRequires:	jack-audio-connection-kit-devel
@@ -20,6 +22,7 @@ BuildRequires:	libsndfile-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	pkgconfig
 BuildRequires:	portaudio-devel
+BuildRequires:	portmidi-devel >= 217
 BuildRequires:	scons
 Requires:	QtSql-sqlite3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -43,8 +46,7 @@ export CXXFLAGS="%{rpmcxxflags}"
 export CCFLAGS="%{rpmcflags}"
 export CXX="%{__cxx}"
 export QMAKE_CXX="%{__cxx}"
-scons \
-	prefix=%{_prefix}
+%scons 
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -52,13 +54,13 @@ export CXXFLAGS="%{rpmcxxflags}"
 export CCFLAGS="%{rpmcflags}"
 export CXX="%{__cxx}"
 export QMAKE_CXX="%{__cxx}"
-scons prefix=%{_prefix} install_root=$RPM_BUILD_ROOT install
+%scons install install_root=$RPM_BUILD_ROOT install
 
 # I don't know why doesn't use 'prefix' option...
 install -d $RPM_BUILD_ROOT%{_prefix}
 mv $RPM_BUILD_ROOT/{bin,share} $RPM_BUILD_ROOT%{_prefix}
 
-rm -rf $RPM_BUILD_ROOT%{_docdir}/mixxx
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/mixxx
 
 %clean
 rm -rf $RPM_BUILD_ROOT
