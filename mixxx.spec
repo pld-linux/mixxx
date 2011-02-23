@@ -3,12 +3,11 @@ Summary(hu.UTF-8):	Mixxx - DJ program
 Summary(pl.UTF-8):	Mixxx - narzędzie dla DJ-ów
 Name:		mixxx
 Version:	1.9.0
-Release:	1
+Release:	2
 License:	GPL/GPL v2+
-Group:		X11/Applications
+Group:		X11/Applications/Multimedia
 Source0:	http://downloads.mixxx.org/mixxx-%{version}/%{name}-%{version}-src.tar.gz
 # Source0-md5:	ea78fc81922e6c7d85d6afffd2e526b1
-Patch0:		%{name}-porttime.patch
 URL:		http://mixxx.org/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	Qt3Support-devel
@@ -46,10 +45,15 @@ Mixxx egy nyílt forrású DJ eszköz profi és amatőr DJ-knek egyaránt.
 Mixxx to mające otwarte źródła narzędzie dla DJ-ów zaprojektowane
 zarówno dla profesjonalistów jak i amatorów.
 
+%package skins-core
+Summary:	The core skins for Mixxx
+Group:		X11/Applications/Multimedia
+
+%description skins-core
+The core skins for Mixxx.
+
 %prep
 %setup -q -n %{name}-%{version}~release-1.9.x~bzr2720
-%undos src/SConscript.env
-# %patch0 -p1
 
 %build
 export CXXFLAGS="%{rpmcxxflags}"
@@ -80,9 +84,33 @@ rm -rf $RPM_BUILD_ROOT
 %doc README Mixxx-Manual.pdf
 %attr(755,root,root) %{_bindir}/mixxx
 %dir %{_datadir}/mixxx
+%dir %{_datadir}/mixxx/skins
+%{_datadir}/mixxx/skins/cross.*
+%doc %{_datadir}/mixxx/skins/*.xsl
+# This is the default skin
+%{_datadir}/mixxx/skins/Outline1024x600-Netbook
+# %{_datadir}/mixxx/skins/outlineNetbook
 %{_datadir}/mixxx/schema.xml
-%{_datadir}/mixxx/skins
 %{_datadir}/mixxx/keyboard
 %{_datadir}/mixxx/midi
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}-icon.png
+
+%files skins-core
+%defattr(644,root,root,755)
+%{_datadir}/mixxx/skins/Deere1280x1024-SXGA
+%{_datadir}/mixxx/skins/Deere1280x800-WXGA
+%{_datadir}/mixxx/skins/LateNight1280x1024-SXGA
+%{_datadir}/mixxx/skins/LateNight1280x800-WXGA
+%{_datadir}/mixxx/skins/LateNightBlues1280x1024-SXGA
+%{_datadir}/mixxx/skins/LateNightBlues1280x800-WXGA
+%{_datadir}/mixxx/skins/Outline1024x768-XGA
+%{_datadir}/mixxx/skins/Outline800x480-WVGA
+%{_datadir}/mixxx/skins/Phoney1600x1200-UXGA
+%{_datadir}/mixxx/skins/Phoney1680x1050-WSXGA
+%{_datadir}/mixxx/skins/PhoneyDark1600x1200-UXGA
+%{_datadir}/mixxx/skins/PhoneyDark1680x1050-WSXGA
+%{_datadir}/mixxx/skins/Shade1024x600-Netbook
+%{_datadir}/mixxx/skins/Shade1024x768-XGA
+%{_datadir}/mixxx/skins/ShadeDark1024x600-Netbook
+%{_datadir}/mixxx/skins/ShadeDark1024x768-XGA
