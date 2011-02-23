@@ -2,12 +2,12 @@ Summary:	Mixxx - DJ tool
 Summary(hu.UTF-8):	Mixxx - DJ program
 Summary(pl.UTF-8):	Mixxx - narzędzie dla DJ-ów
 Name:		mixxx
-Version:	1.8.2
-Release:	4
+Version:	1.9.0
+Release:	1
 License:	GPL/GPL v2+
 Group:		X11/Applications
 Source0:	http://downloads.mixxx.org/mixxx-%{version}/%{name}-%{version}-src.tar.gz
-# Source0-md5:	f0297f4493d4d8e6ad59f72970bad7bc
+# Source0-md5:	ea78fc81922e6c7d85d6afffd2e526b1
 Patch0:		%{name}-porttime.patch
 URL:		http://mixxx.org/
 BuildRequires:	OpenGL-GLU-devel
@@ -47,9 +47,9 @@ Mixxx to mające otwarte źródła narzędzie dla DJ-ów zaprojektowane
 zarówno dla profesjonalistów jak i amatorów.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}~release-1.9.x~bzr2720
 %undos src/SConscript.env
-%patch0 -p1
+# %patch0 -p1
 
 %build
 export CXXFLAGS="%{rpmcxxflags}"
