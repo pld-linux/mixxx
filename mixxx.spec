@@ -47,10 +47,14 @@ zarówno dla profesjonalistów jak i amatorów.
 
 %package skins-core
 Summary:	The core skins for Mixxx
+Summary(hu.UTF-8):	Alap skinek a Mixxx-hez
 Group:		X11/Applications/Multimedia
 
 %description skins-core
 The core skins for Mixxx.
+
+%description skins-core -l hu.UTF-8
+Alap skinek a Mixxx-hez.
 
 %prep
 %setup -q -n %{name}-%{version}~release-1.9.x~bzr2720
