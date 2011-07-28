@@ -3,11 +3,12 @@ Summary(hu.UTF-8):	Mixxx - DJ program
 Summary(pl.UTF-8):	Mixxx - narzędzie dla DJ-ów
 Name:		mixxx
 Version:	1.9.0
-Release:	2
+Release:	3
 License:	GPL/GPL v2+
 Group:		X11/Applications/Multimedia
 Source0:	http://downloads.mixxx.org/mixxx-%{version}/%{name}-%{version}-src.tar.gz
 # Source0-md5:	ea78fc81922e6c7d85d6afffd2e526b1
+Patch0:		desktop.patch
 URL:		http://mixxx.org/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	Qt3Support-devel
@@ -58,6 +59,7 @@ Alap skinek a Mixxx-hez.
 
 %prep
 %setup -q -n %{name}-%{version}~release-1.9.x~bzr2720
+%patch0 -p1
 
 %build
 export CXXFLAGS="%{rpmcxxflags}"
