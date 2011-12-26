@@ -2,12 +2,12 @@ Summary:	Mixxx - DJ tool
 Summary(hu.UTF-8):	Mixxx - DJ program
 Summary(pl.UTF-8):	Mixxx - narzędzie dla DJ-ów
 Name:		mixxx
-Version:	1.9.2
+Version:	1.10.0
 Release:	1
 License:	GPL/GPL v2+
 Group:		X11/Applications/Multimedia
 Source0:	http://downloads.mixxx.org/mixxx-%{version}/%{name}-%{version}-src.tar.gz
-# Source0-md5:	f84095951f66b12af5cf45d19200ff82
+# Source0-md5:	d92bf422491fa92adf7ed6c2998e67fb
 Patch0:		desktop.patch
 URL:		http://mixxx.org/
 BuildRequires:	OpenGL-GLU-devel
@@ -57,6 +57,17 @@ The core skins for Mixxx.
 %description skins-core -l hu.UTF-8
 Alap skinek a Mixxx-hez.
 
+%package translations
+Summary:	Translations for Mixxx
+Summary(hu.UTF-8):	Nyelvi fájlok a Mixxx-hez
+Group:		X11/Applications/Multimedia
+
+%description translations
+Translations for Mixxx.
+
+%description translations -l hu.UTF-8
+Nyelvi fájlok a Mixxx-hez.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -91,6 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/mixxx
 %dir %{_datadir}/mixxx
 %dir %{_datadir}/mixxx/skins
+%dir %{_datadir}/mixxx/translations
 %{_datadir}/mixxx/skins/cross.*
 %doc %{_datadir}/mixxx/skins/*.xsl
 # This is the default skin
@@ -102,21 +114,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}-icon.png
 
+%files translations
+%defattr(644,root,root,755)
+%{_datadir}/mixxx/translations/*
+
 %files skins-core
 %defattr(644,root,root,755)
-%{_datadir}/mixxx/skins/Deere1280x1024-SXGA
-%{_datadir}/mixxx/skins/Deere1280x800-WXGA
-%{_datadir}/mixxx/skins/LateNight1280x1024-SXGA
-%{_datadir}/mixxx/skins/LateNight1280x800-WXGA
-%{_datadir}/mixxx/skins/LateNightBlues1280x1024-SXGA
-%{_datadir}/mixxx/skins/LateNightBlues1280x800-WXGA
-%{_datadir}/mixxx/skins/Outline1024x768-XGA
-%{_datadir}/mixxx/skins/Outline800x480-WVGA
-%{_datadir}/mixxx/skins/Phoney1600x1200-UXGA
-%{_datadir}/mixxx/skins/Phoney1680x1050-WSXGA
-%{_datadir}/mixxx/skins/PhoneyDark1600x1200-UXGA
-%{_datadir}/mixxx/skins/PhoneyDark1680x1050-WSXGA
-%{_datadir}/mixxx/skins/Shade1024x600-Netbook
-%{_datadir}/mixxx/skins/Shade1024x768-XGA
-%{_datadir}/mixxx/skins/ShadeDark1024x600-Netbook
-%{_datadir}/mixxx/skins/ShadeDark1024x768-XGA
+%{_datadir}/mixxx/skins/*
