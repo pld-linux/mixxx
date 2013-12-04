@@ -2,12 +2,12 @@ Summary:	Mixxx - DJ tool
 Summary(hu.UTF-8):	Mixxx - DJ program
 Summary(pl.UTF-8):	Mixxx - narzędzie dla DJ-ów
 Name:		mixxx
-Version:	1.10.1
+Version:	1.11.0
 Release:	1
 License:	GPL/GPL v2+
 Group:		X11/Applications/Multimedia
 Source0:	http://downloads.mixxx.org/mixxx-%{version}/%{name}-%{version}-src.tar.gz
-# Source0-md5:	765bc5216ec8102c2186dd3ea80187a9
+# Source0-md5:	89ee8ba60824919d8dd1194287bda259
 Patch0:		desktop.patch
 URL:		http://mixxx.org/
 BuildRequires:	OpenGL-GLU-devel
@@ -22,6 +22,7 @@ BuildRequires:	fftw-devel
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	libid3tag-devel
 BuildRequires:	libmad-devel
+BuildRequires:	libshout-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	pkgconfig
@@ -31,6 +32,7 @@ BuildRequires:	qt4-build
 BuildRequires:	qt4-linguist
 BuildRequires:	rpmbuild(macros) >= 1.566
 BuildRequires:	scons
+BuildRequires:	vamp-devel
 BuildRequires:	sed >= 4.0
 Requires:	QtSql-sqlite3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -104,13 +106,12 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/mixxx/skins
 %dir %{_datadir}/mixxx/translations
 %{_datadir}/mixxx/skins/cross.*
-%doc %{_datadir}/mixxx/skins/*.xsl
 # This is the default skin
 %{_datadir}/mixxx/skins/Outline1024x600-Netbook
 # %{_datadir}/mixxx/skins/outlineNetbook
 %{_datadir}/mixxx/schema.xml
+%{_datadir}/mixxx/controllers
 %{_datadir}/mixxx/keyboard
-%{_datadir}/mixxx/midi
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}-icon.png
 
@@ -121,3 +122,5 @@ rm -rf $RPM_BUILD_ROOT
 %files skins-core
 %defattr(644,root,root,755)
 %{_datadir}/mixxx/skins/*
+%exclude %{_datadir}/mixxx/skins/cross.*
+%exclude %{_datadir}/mixxx/skins/Outline1024x600-Netbook
