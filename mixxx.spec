@@ -3,12 +3,13 @@ Summary(hu.UTF-8):	Mixxx - DJ program
 Summary(pl.UTF-8):	Mixxx - narzędzie dla DJ-ów
 Name:		mixxx
 Version:	1.11.0
-Release:	5
+Release:	6
 License:	GPL v2+
 Group:		X11/Applications/Multimedia
 Source0:	http://downloads.mixxx.org/mixxx-%{version}/%{name}-%{version}-src.tar.gz
 # Source0-md5:	89ee8ba60824919d8dd1194287bda259
 Patch0:		desktop.patch
+Patch1:		%{name}-libdir.patch
 URL:		http://mixxx.org/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	Qt3Support-devel >= 4.6
@@ -84,6 +85,7 @@ Podstawowe skórki dla programu Mixxx.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 export CXXFLAGS="%{rpmcxxflags}"
@@ -91,6 +93,7 @@ export CCFLAGS="%{rpmcflags}"
 export CXX="%{__cxx}"
 export QMAKE_CXX="%{__cxx}"
 %scons \
+	libdir=%{_libdir} \
 	faad=1 \
 	wv=1
 # ffmpeg=1 is "NOT-WORKING"
@@ -104,7 +107,8 @@ export CCFLAGS="%{rpmcflags}"
 export CXX="%{__cxx}"
 export QMAKE_CXX="%{__cxx}"
 %scons install \
-	install_root=$RPM_BUILD_ROOT%{_prefix}
+	install_root=$RPM_BUILD_ROOT \
+	libdir=%{_libdir}
 
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/mixxx
 
