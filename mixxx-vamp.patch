@@ -1,0 +1,11 @@
+--- mixxx-release-2.2.1/build/features.py.orig	2019-04-22 09:50:04.000000000 +0200
++++ mixxx-release-2.2.1/build/features.py	2019-08-02 05:28:58.529310596 +0200
+@@ -396,7 +396,7 @@
+         # If there is no system vamp-hostsdk is installed or if the version
+         # of the installed vamp-hostsdk is less than the bundled version,
+         # then we'll directly link the bundled vamp-hostsdk
+-        if not conf.CheckLib('vamp-hostsdk') or not conf.CheckForPKG('vamp-plugin-sdk', '2.7.1'):
++        if not conf.CheckLib('vamp-hostsdk') or not conf.CheckForPKG('vamp-sdk', '2.7.1'):
+             # For header includes
+             build.env.Append(CPPPATH=[self.INTERNAL_VAMP_PATH])
+             self.INTERNAL_LINK = True
