@@ -157,9 +157,9 @@ export CXXFLAGS="%{rpmcxxflags}"
 export CCFLAGS="%{rpmcflags}"
 export CXX="%{__cxx}"
 export QMAKE_CXX="%{__cxx}"
+export LIBDIR=%{_libdir}
 %scons \
 	prefix=%{_prefix} \
-	LIBDIR=%{_lib} \
 	%{!?with_upower:battery=0} \
 	%{?with_faad:faad=1} \
 	%{?with_ffmpeg:ffmpeg=1} \
@@ -179,8 +179,8 @@ export CXXFLAGS="%{rpmcxxflags}"
 export CCFLAGS="%{rpmcflags}"
 export CXX="%{__cxx}"
 export QMAKE_CXX="%{__cxx}"
+export LIBDIR=%{_libdir}
 %scons install \
-	LIBDIR=%{_lib} \
 	install_root=$RPM_BUILD_ROOT%{_prefix}
 
 # packaged as %doc
