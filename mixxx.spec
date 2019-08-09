@@ -22,7 +22,7 @@ Summary(hu.UTF-8):	Mixxx - DJ program
 Summary(pl.UTF-8):	Mixxx - narzędzie dla DJ-ów
 Name:		mixxx
 Version:	2.2.1
-Release:	1
+Release:	2
 License:	GPL v2+ (code), Apache v2.0 (OpenSans font), Ubuntu Font License v1.0 (Ubuntu fonts)
 Group:		X11/Applications/Multimedia
 Source0:	https://github.com/mixxxdj/mixxx/archive/release-%{version}/%{name}-release-%{version}.tar.gz
@@ -109,7 +109,7 @@ BuildRequires:	xorg-lib-libX11-devel
 %if %{with qt4}
 Requires:	QtSql-sqlite3 >= %{qt4_ver}
 %else
-Requires:	Qt5Sql-sqlite3 >= %{qt5_ver}
+Requires:	Qt5Sql-sqldriver-sqlite3 >= %{qt5_ver}
 %endif
 %{?with_faad:Requires:	faad2 >= 2.7}
 %{?with_hidapi:Requires:	hidapi >= 0.8.0}
