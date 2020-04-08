@@ -22,7 +22,7 @@ Summary(hu.UTF-8):	Mixxx - DJ program
 Summary(pl.UTF-8):	Mixxx - narzędzie dla DJ-ów
 Name:		mixxx
 Version:	2.2.1
-Release:	3
+Release:	4
 License:	GPL v2+ (code), Apache v2.0 (OpenSans font), Ubuntu Font License v1.0 (Ubuntu fonts)
 Group:		X11/Applications/Multimedia
 Source0:	https://github.com/mixxxdj/mixxx/archive/release-%{version}/%{name}-release-%{version}.tar.gz
@@ -151,6 +151,9 @@ Podstawowe skórki dla programu Mixxx.
 %prep
 %setup -q -n %{name}-release-%{version}
 %patch0 -p1
+
+%{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+node(\s|$),#!%{_bindir}/node\1,' \
+      res/controllers/novation-launchpad/scripts/*.js
 
 %build
 export CXXFLAGS="%{rpmcxxflags}"
