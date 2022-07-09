@@ -1,0 +1,11 @@
+--- mixxx-2.3.3/CMakeLists.txt.orig	2022-07-09 08:53:29.480632015 +0200
++++ mixxx-2.3.3/CMakeLists.txt	2022-07-09 08:53:31.937285373 +0200
+@@ -53,8 +53,6 @@ if(NOT CMAKE_CONFIGURATION_TYPES)
+     set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE STRING "Choose the type of build." FORCE)
+     # Set the possible values of build type for cmake-gui
+     set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "RelWithDebInfo")
+-  elseif(NOT CMAKE_BUILD_TYPE MATCHES "^(Debug|Release|RelWithDebInfo)$")
+-    message(FATAL_ERROR "CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} is not supported, use one of Debug, Release or RelWithDebInfo.")
+   endif()
+ endif()
+ 
