@@ -22,7 +22,6 @@ Source0:	https://github.com/mixxxdj/mixxx/archive/%{version}/%{name}-%{version}.
 # Source0-md5:	486d370480980fa59613dd992bab312c
 Patch0:		%{name}-build-type.patch
 URL:		https://mixxx.org/
-# Could NOT find Shoutidjc (missing: Shoutidjc_LIBRARY Shoutidjc_INCLUDE_DIR) / Using internal libshout-idjc
 BuildRequires:	OpenGL-devel
 BuildRequires:	Qt5Concurrent-devel >= %{qt5_ver}
 BuildRequires:	Qt5Core-devel >= %{qt5_ver}
@@ -53,6 +52,8 @@ BuildRequires:	libmad-devel
 BuildRequires:	libmodplug-devel
 BuildRequires:	libogg-devel
 BuildRequires:	libkeyfinder-devel >= 2.2.6
+# TODO: use system package when appropriate version gets released
+#BuildRequires:	libshout-idjc-devel >= 2.4.6
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	libusb-devel >= 1.0
