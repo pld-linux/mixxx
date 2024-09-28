@@ -25,6 +25,7 @@ Source0:	https://github.com/mixxxdj/mixxx/archive/%{version}/%{name}-%{version}.
 Patch0:		%{name}-build-type.patch
 Patch1:		%{name}-taglib2.patch
 Patch2:		%{name}-msgsl.patch
+Patch3:		%{name}-libdjinterop.patch
 URL:		https://mixxx.org/
 BuildRequires:	OpenGL-devel
 BuildRequires:	Qt5Concurrent-devel >= %{qt5_ver}
@@ -53,6 +54,7 @@ BuildRequires:	gtest-devel
 %{?with_hidapi:BuildRequires:	hidapi-devel >= 0.11.2}
 BuildRequires:	lame-libs-devel
 BuildRequires:	libchromaprint-devel
+BuildRequires:	libdjinterop-devel >= 0.20.2
 BuildRequires:	libebur128-devel
 BuildRequires:	libid3tag-devel
 BuildRequires:	libmad-devel
@@ -134,6 +136,7 @@ Podstawowe skórki dla programu Mixxx.
 %patch0 -p1
 %{?with_taglib2:%patch1 -p1}
 %patch2 -p1
+%patch3 -p1
 
 %build
 %cmake -B build \
