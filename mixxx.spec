@@ -1,4 +1,4 @@
-# TODO: system djinterop >= 0.20.2, shoutidjc >= 2.4.6?
+# TODO: system shoutidjc >= 2.4.6?
 #
 # Conditional build:
 %bcond_without	faad		# FAAD AAC audio decoder
@@ -146,7 +146,9 @@ Podstawowe skórki dla programu Mixxx.
 	%{!?with_ffmpeg:-DFFMPEG=OFF} \
 	%{!?with_hidapi:-DHID=OFF} \
 	%{!?with_lv2:-DLILV=OFF} \
-	-DOPTIMIZE=off \
+	-DLLD_SUPPORT=OFF \
+	-DMOLD_SUPPORT=OFF \
+	-DOPTIMIZE=OFF \
 	%{!?with_qtkeychain:-DQTKEYCHAIN=OFF} \
 	%{!?with_wavpack:-DWAVPACK=OFF}
 
