@@ -1,20 +1,20 @@
---- mixxx-2.4.1/CMakeLists.txt.orig	2024-05-08 23:05:56.000000000 +0200
-+++ mixxx-2.4.1/CMakeLists.txt	2024-09-25 18:27:13.893167991 +0200
-@@ -1754,7 +1754,7 @@ endif()
- # src/qmldlgpreferencesproxy.h, which is #included from src/qmlapplication.h.
- target_include_directories(mixxx PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/mixxx-lib_autogen/include")
+--- mixxx-2.5.2/CMakeLists.txt.orig	2025-08-29 06:22:49.195412802 +0200
++++ mixxx-2.5.2/CMakeLists.txt	2025-08-29 06:23:33.843291598 +0200
+@@ -1813,7 +1813,7 @@ else()
+ endif()
+ 
  set_target_properties(mixxx-lib PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY}")
 -target_link_libraries(mixxx PRIVATE mixxx-lib mixxx-gitinfostore)
 +target_link_libraries(mixxx PRIVATE mixxx-lib mixxx-gitinfostore Microsoft.GSL::GSL)
  
  #
  # Installation and Packaging
-@@ -2106,7 +2106,7 @@ add_executable(mixxx-test
- target_precompile_headers(mixxx-test REUSE_FROM mixxx-lib)
- find_package(GTest CONFIG REQUIRED)
- set_target_properties(mixxx-test PROPERTIES AUTOMOC ON)
--target_link_libraries(mixxx-test PRIVATE mixxx-lib mixxx-gitinfostore GTest::gtest GTest::gmock)
-+target_link_libraries(mixxx-test PRIVATE mixxx-lib mixxx-gitinfostore GTest::gtest GTest::gmock Microsoft.GSL::GSL)
+@@ -2232,7 +2232,7 @@ if(BUILD_TESTING)
  
- find_package(benchmark)
- target_link_libraries(mixxx-test PRIVATE benchmark::benchmark)
+   target_precompile_headers(mixxx-test REUSE_FROM mixxx-lib)
+   set_target_properties(mixxx-test PROPERTIES AUTOMOC ON)
+-  target_link_libraries(mixxx-test PRIVATE mixxx-lib mixxx-gitinfostore GTest::gtest GTest::gmock)
++  target_link_libraries(mixxx-test PRIVATE mixxx-lib mixxx-gitinfostore GTest::gtest GTest::gmock Microsoft.GSL::GSL)
+ 
+   if(BUILD_BENCH)
+     add_compile_definitions(USE_BENCH)

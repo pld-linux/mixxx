@@ -1,33 +1,33 @@
-# TODO: system shoutidjc >= 2.4.6?
 #
 # Conditional build:
 %bcond_without	faad		# FAAD AAC audio decoder
 %bcond_without	ffmpeg		# FFmpeg support
 %bcond_without	hidapi		# HID controller support
 %bcond_without	lv2		# LV2 support
+%bcond_with	qt5		# Qt5 instead of Qt6
 %bcond_without	qtkeychain	# secure credentials storage for Live Broadcasting profiles (qt5 only, see below)
-%bcond_with	taglib2		# allow Taglib 2 (not fully supported)
 %bcond_without	upower		# UPower battery state support
 %bcond_without	wavpack		# WavPack audio decoder
 
 %define		qt5_ver		5.12
+%define		qt6_ver		6.2
 
 Summary:	Mixxx - DJ tool
 Summary(hu.UTF-8):	Mixxx - DJ program
 Summary(pl.UTF-8):	Mixxx - narzędzie dla DJ-ów
 Name:		mixxx
-Version:	2.4.1
-Release:	2
+Version:	2.5.2
+Release:	1
 License:	GPL v2+ (code), Apache v2.0 (OpenSans font), Ubuntu Font License v1.0 (Ubuntu fonts)
 Group:		X11/Applications/Multimedia
 Source0:	https://github.com/mixxxdj/mixxx/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	95d2cc0cb35b88164615a75d9466bc0f
+# Source0-md5:	5d986f81243d2867a139fb28e6cb5e2c
 Patch0:		%{name}-build-type.patch
-Patch1:		%{name}-taglib2.patch
 Patch2:		%{name}-msgsl.patch
 Patch3:		%{name}-libdjinterop.patch
 URL:		https://mixxx.org/
 BuildRequires:	OpenGL-devel
+%if %{with qt5}
 BuildRequires:	Qt5Concurrent-devel >= %{qt5_ver}
 BuildRequires:	Qt5Core-devel >= %{qt5_ver}
 BuildRequires:	Qt5DBus-devel >= %{qt5_ver}
@@ -37,6 +37,8 @@ BuildRequires:	Qt5Network-devel >= %{qt5_ver}
 BuildRequires:	Qt5OpenGL-devel >= %{qt5_ver}
 BuildRequires:	Qt5PrintSupport-devel >= %{qt5_ver}
 BuildRequires:	Qt5Qml-devel >= %{qt5_ver}
+BuildRequires:	Qt5Quick-devel >= %{qt5_ver}
+BuildRequires:	Qt5Quick-controls2-devel >= %{qt5_ver}
 BuildRequires:	Qt5Script-devel >= %{qt5_ver}
 BuildRequires:	Qt5ScriptTools-devel >= %{qt5_ver}
 BuildRequires:	Qt5Sql-devel >= %{qt5_ver}
@@ -45,6 +47,25 @@ BuildRequires:	Qt5Test-devel >= %{qt5_ver}
 BuildRequires:	Qt5Widgets-devel >= %{qt5_ver}
 BuildRequires:	Qt5X11Extras-devel >= %{qt5_ver}
 BuildRequires:	Qt5Xml-devel >= %{qt5_ver}
+%else
+BuildRequires:	Qt6Concurrent-devel >= %{qt6_ver}
+BuildRequires:	Qt6Core-devel >= %{qt6_ver}
+BuildRequires:	Qt6DBus-devel >= %{qt6_ver}
+BuildRequires:	Qt6Gui-devel >= %{qt6_ver}
+%{?with_qtkeychain:BuildRequires:	Qt6Keychain-devel}
+BuildRequires:	Qt6Network-devel >= %{qt6_ver}
+BuildRequires:	Qt6OpenGL-devel >= %{qt6_ver}
+BuildRequires:	Qt6PrintSupport-devel >= %{qt6_ver}
+BuildRequires:	Qt6Qml-devel >= %{qt6_ver}
+BuildRequires:	Qt6Quick-devel >= %{qt6_ver}
+BuildRequires:	Qt6Qt5Compat-devel >= %{qt6_ver}
+BuildRequires:	Qt6ShaderTools-devel >= %{qt6_ver}
+BuildRequires:	Qt6Sql-devel >= %{qt6_ver}
+BuildRequires:	Qt6Svg-devel >= %{qt6_ver}
+BuildRequires:	Qt6Test-devel >= %{qt6_ver}
+BuildRequires:	Qt6Widgets-devel >= %{qt6_ver}
+BuildRequires:	Qt6Xml-devel >= %{qt6_ver}
+%endif
 BuildRequires:	cmake >= 3.16
 # libavcodec >= 58.35.100 libavformat >= 58.20.100 libavutil >= 56.22.100 libswresample >= 3.3.100
 %{?with_ffmpeg:BuildRequires:	ffmpeg-devel >= 4.1.9}
@@ -54,15 +75,14 @@ BuildRequires:	gtest-devel
 %{?with_hidapi:BuildRequires:	hidapi-devel >= 0.11.2}
 BuildRequires:	lame-libs-devel
 BuildRequires:	libchromaprint-devel
-BuildRequires:	libdjinterop-devel >= 0.20.2
+BuildRequires:	libdjinterop-devel >= 0.24.3
 BuildRequires:	libebur128-devel
 BuildRequires:	libid3tag-devel
 BuildRequires:	libmad-devel
 BuildRequires:	libmodplug-devel
 BuildRequires:	libogg-devel
 BuildRequires:	libkeyfinder-devel >= 2.2.8
-# TODO: use system package when appropriate version gets released
-#BuildRequires:	libshout-idjc-devel >= 2.4.6
+BuildRequires:	libshout-idjc-devel >= 2.4.6
 BuildRequires:	libsndfile-devel
 # -std=c++20
 BuildRequires:	libstdc++-devel >= 6:8
@@ -81,24 +101,32 @@ BuildRequires:	portmidi-devel >= 217
 BuildRequires:	protobuf-devel
 BuildRequires:	python3 >= 1:3
 BuildRequires:	rubberband-devel
+%if %{with qt5}
 BuildRequires:	qt5-build >= %{qt5_ver}
 BuildRequires:	qt5-linguist >= %{qt5_ver}
+%else
+BuildRequires:	qt6-build >= %{qt6_ver}
+BuildRequires:	qt6-linguist >= %{qt6_ver}
+BuildRequires:	qt6-shadertools >= %{qt6_ver}
+%endif
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	sed >= 4.0
 BuildRequires:	soundtouch-devel >= 2.1.2
 BuildRequires:	sqlite3-devel >= 3
 BuildRequires:	taglib-devel >= 1.11
-%{!?with_taglib2:BuildRequires:	taglib-devel < 2}
 BuildRequires:	udev-devel
 %{?with_upower:BuildRequires:	upower-devel}
 %{?with_wavpack:BuildRequires:	wavpack-devel}
 BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libxkbcommon-devel >= 0.5.0
 # for local djinterop
 BuildRequires:	zlib-devel >= 1.2.8
 Requires:	Qt5Sql-sqldriver-sqlite3 >= %{qt5_ver}
 %{?with_ffmpeg:Requires:	ffmpeg-libs >= 4.1.9}
 %{?with_hidapi:Requires:	hidapi >= 0.11.2}
+Requires:	libdjinterop >= 0.24.3
 Requires:	libkeyfinder >= 2.2.8
+Requires:	libshout-idjc >= 2.4.6
 Requires:	soundtouch >= 2.1.2
 Requires:	taglib >= 1.11
 Requires:	zlib >= 1.2.8
@@ -134,7 +162,6 @@ Podstawowe skórki dla programu Mixxx.
 %prep
 %setup -q
 %patch -P0 -p1
-%{?with_taglib2:%patch -P1 -p1}
 %patch -P2 -p1
 %patch -P3 -p1
 
@@ -190,12 +217,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mixxx/controllers
 %{_datadir}/mixxx/effects
 %{_datadir}/mixxx/keyboard
+%{_datadir}/mixxx/qml
 %dir %{_datadir}/mixxx/skins
 %{_datadir}/mixxx/skins/*.qss
 # This is the default skin
 %{_datadir}/mixxx/skins/Deere
 %dir %{_datadir}/mixxx/translations
 %lang(ar) %{_datadir}/mixxx/translations/mixxx_ar.qm
+%lang(ar_DZ) %{_datadir}/mixxx/translations/mixxx_ar_DZ.qm
 %lang(ast) %{_datadir}/mixxx/translations/mixxx_ast.qm
 %lang(bg) %{_datadir}/mixxx/translations/mixxx_bg.qm
 %lang(br) %{_datadir}/mixxx/translations/mixxx_br.qm
@@ -270,6 +299,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/org.mixxx.Mixxx.desktop
 %{_iconsdir}/hicolor/*x*/apps/mixxx.png
 %{_iconsdir}/hicolor/scalable/apps/mixxx.svg
+%{_iconsdir}/hicolor/scalable/apps/mixxx_ios.svg
 
 %files skins-core
 %defattr(644,root,root,755)

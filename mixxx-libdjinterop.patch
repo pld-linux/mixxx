@@ -1,11 +1,14 @@
---- mixxx-2.4.1/CMakeLists.txt.orig	2024-09-28 21:47:06.674846532 +0200
-+++ mixxx-2.4.1/CMakeLists.txt	2024-09-28 22:01:31.953175308 +0200
-@@ -2283,7 +2283,7 @@ if(ENGINEPRIME)
+--- mixxx-2.5.2/CMakeLists.txt.orig	2025-08-29 06:18:22.546245677 +0200
++++ mixxx-2.5.2/CMakeLists.txt	2025-08-29 06:19:12.115896755 +0200
+@@ -2423,9 +2423,9 @@ if(ENGINEPRIME)
    # statically.  This situation should be reviewed once libdjinterop hits version 1.x.
-   set(LIBDJINTEROP_VERSION 0.20.2)
+   set(LIBDJINTEROP_VERSION 0.24.3)
    # Look whether an existing installation of libdjinterop matches the required version.
 -  find_package(DjInterop  ${LIBDJINTEROP_VERSION} EXACT CONFIG)
 +  find_package(DjInterop  ${LIBDJINTEROP_VERSION} CONFIG)
    if(NOT DjInterop_FOUND)
-     find_package(DjInterop  ${LIBDJINTEROP_VERSION} EXACT MODULE)
+-    find_package(DjInterop  ${LIBDJINTEROP_VERSION} EXACT MODULE)
++    find_package(DjInterop  ${LIBDJINTEROP_VERSION} MODULE)
    endif()
+ 
+   if(DjInterop_FOUND)
